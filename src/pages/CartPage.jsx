@@ -1,3 +1,4 @@
+// src/pages/CartPage.js
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { removeItem, clearCart } from '../redux/cartSlice';
@@ -7,7 +8,7 @@ const CartPage = () => {
   const dispatch = useDispatch();
   const cartItems = useSelector((state) => state.cart.items);
 
-  // Calculate the total price of the cart
+  // Calculate total price
   const totalPrice = cartItems.reduce((total, item) => total + item.price * item.quantity, 0);
 
   return (
@@ -20,9 +21,7 @@ const CartPage = () => {
           {cartItems.map((item) => (
             <div key={item.id} style={styles.cartItem}>
               <img src={item.image} alt={item.name} style={styles.cartImage} />
-              <p>
-                {item.name} x {item.quantity} = Rs{item.price * item.quantity}
-              </p>
+              <p>{item.name} x {item.quantity} = Rs{item.price * item.quantity}</p>
               <button
                 style={styles.removeButton}
                 onClick={() => dispatch(removeItem(item.id))}
